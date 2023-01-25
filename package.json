@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "rollup": "^3.10.1"
+  },
+  "scripts": {
+    "build": "rollup -c -w"
+  }
+}

@@ -18,7 +18,9 @@
 
 # Description
 
-Measure speed and direction using location.
+Measure speed and direction using GPS.
+
+Currently under development.
 
 # About languages
 
