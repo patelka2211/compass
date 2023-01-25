@@ -16,7 +16,7 @@ export function Coordinates(Latitude: number, Longitude: number): coords {
     };
 }
 
-function geoDistance(
+export function geoDistance(
     currentLocation: coords,
     previousLocation: coords
 ): number {

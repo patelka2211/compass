@@ -8,7 +8,7 @@ export function Coordinates(Latitude, Longitude) {
         long: Number(Longitude.toFixed(4)),
     };
 }
-function geoDistance(currentLocation, previousLocation) {
+export function geoDistance(currentLocation, previousLocation) {
     return Number((6371 *
         Math.acos(Math.sin(currentLocation.lat) * Math.sin(previousLocation.lat) +
             Math.cos(currentLocation.lat) *
