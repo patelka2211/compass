@@ -41,7 +41,7 @@ function startUpdate() {
     btn.innerHTML = "Stop update";
     btn.onclick = stopUpdate;
     getLocation(successHandler, errorHandler);
-    interval = setInterval(() => {
+    intervalid = setInterval(() => {
         getLocation(successHandler, errorHandler);
     }, interval * 1000);
 }
