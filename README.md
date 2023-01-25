@@ -2,7 +2,7 @@
 
 <div style="width: 100%;text-align: center;">
     <div title="patelka2211/speedometer on GitHub" style="display: flex;flex-direction: column;align-items: center;justify-content: space-around; max-width: 100vw; margin: auto; padding: 0.6vh;border: 1px solid #b9bbbe99; border-radius: 1.6vh;">
-        <img src="https://opengraph.githubassets.com/1fjljefe/patelka2211/speedometer" alt="" style="width: 100%;height: 100%;border-radius: 1vh;">
+        <img src="https://opengraph.githubassets.com/1/patelka2211/speedometer" alt="" style="width: 100%;height: 100%;border-radius: 1vh;">
         <div style="margin: 5px auto;color: #58a6ff;">
             github.com /
             <code>
