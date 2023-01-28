@@ -1,0 +1,12 @@
+{
+    "liveSassCompile.settings.forceBaseDirectory": "./css",
+    "liveSassCompile.settings.formats": [
+        {
+            "format": "compressed",
+            "extensionName": ".css",
+            "savePath": null,
+            "savePathReplacementPairs": null
+        }
+    ],
+    "liveSassCompile.settings.generateMap": false
+}

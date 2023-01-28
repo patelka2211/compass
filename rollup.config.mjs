@@ -1,7 +1,7 @@
 export default {
     input: "./dist/index.js",
     output: {
-        file: "./bundle/speedometer.js",
+        file: "./bundle/compass.js",
         format: "esm",
     },
 };
