@@ -34,47 +34,54 @@ function Coordinates(Latitude: number, Longitude: number): coords {
 
 function calculateDirection(currentLocation: coords, previousLocation: coords) {
     let deltaLat = currentLocation.lat - previousLocation.lat,
-        deltaLong = currentLocation.long - previousLocation.long;
+        deltaLong = currentLocation.long - previousLocation.long,
+        return_value: { direction: string; angle: number } = {
+            direction: "",
+            angle: 0,
+        },
+        calculate_angel = true,
+        angle: number = 0;
 
-    let return_value: { direction: string; angle: number } = {
-        direction: "",
-        angle: 0,
-    };
+    if (deltaLat == 0 || (deltaLong == 0 && deltaLat != 0)) {
+        if (deltaLat == 0) {
+            if (deltaLong > 0) angle = 90;
+            else angle = 270;
+        }
 
-    let angle =
-        90 -
-        Math.abs(
-            Number(
-                ((Math.atan(deltaLat / deltaLong) / Math.PI) * 180).toFixed(0)
-            )
-        );
+        if (deltaLong == 0) {
+            if (deltaLat > 0) angle = 0;
+            else angle = 180;
+        }
 
-    if (deltaLat == 0) {
-        if (deltaLong > 0) angle = 90;
-        else if (deltaLong < 0) angle = 270;
-    } else if (deltaLat > 0) {
-        if (deltaLong == 0) angle = 0;
-        else if (deltaLong < 0) angle += 270;
-    } else if (deltaLat < 0) {
-        if (deltaLong == 0) angle = 180;
-        else if (deltaLong > 0) angle += 90;
-        else if (deltaLong < 0) angle += 180;
+        calculate_angel = false;
     }
 
+    if (calculate_angel) {
+        angle =
+            90 -
+            Math.abs(
+                Number(
+                    ((Math.atan(deltaLat / deltaLong) / Math.PI) * 180).toFixed(
+                        0
+                    )
+                )
+            );
+        if (deltaLat < 0 && deltaLong > 0) angle += 90;
+        else if (deltaLat > 0 && deltaLong < 0) angle += 270;
+        else if (deltaLat < 0 && deltaLong < 0) angle += 180;
+    }
     return_value.angle = angle;
 
     for (const key in directions) {
         if (Object.prototype.hasOwnProperty.call(directions, key)) {
             const direction: direction_id_and_range = directions[key];
 
-            if (direction.range[0] > angle && angle < direction.range[1]) {
+            if (direction.range[0] < angle && angle < direction.range[1]) {
                 return_value.direction = direction.name;
-                break;
+                return return_value;
             }
         }
     }
-
-    return return_value;
 }
 
 console.log(
