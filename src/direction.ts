@@ -66,9 +66,10 @@ function calculateDirection(currentLocation: coords, previousLocation: coords) {
                     )
                 )
             );
-        if (deltaLat < 0 && deltaLong > 0) angle += 90;
-        else if (deltaLat > 0 && deltaLong < 0) angle += 270;
-        else if (deltaLat < 0 && deltaLong < 0) angle += 180;
+        if (deltaLat < 0) {
+            if (deltaLong > 0) angle += 90;
+            else if (deltaLong < 0) angle += 180;
+        } else if (deltaLat > 0 && deltaLong < 0) angle += 270;
     }
     return_value.angle = angle;
 

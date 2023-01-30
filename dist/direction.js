@@ -43,12 +43,14 @@ function calculateDirection(currentLocation, previousLocation) {
         angle =
             90 -
                 Math.abs(Number(((Math.atan(deltaLat / deltaLong) / Math.PI) * 180).toFixed(0)));
-        if (deltaLat < 0 && deltaLong > 0)
-            angle += 90;
+        if (deltaLat < 0) {
+            if (deltaLong > 0)
+                angle += 90;
+            else if (deltaLong < 0)
+                angle += 180;
+        }
         else if (deltaLat > 0 && deltaLong < 0)
             angle += 270;
-        else if (deltaLat < 0 && deltaLong < 0)
-            angle += 180;
     }
     return_value.angle = angle;
     for (const key in directions) {
