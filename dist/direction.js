@@ -1,4 +1,3 @@
-"use strict";
 const directions = {
     N: { name: "N", range: [337.5, 22.5] },
     NE: { name: "NE", range: [22.5, 67.5] },
@@ -9,7 +8,7 @@ const directions = {
     W: { name: "W", range: [247.5, 292.5] },
     NW: { name: "NW", range: [292.5, 337.5] },
 };
-function Coordinates(Latitude, Longitude) {
+export const Coordinates = (Latitude, Longitude) => {
     if (Latitude < -90 || Latitude > 90)
         throw Error(`Latitude must be range from -90 to 90. Not ${Latitude}`);
     else if (Longitude < -180 || Longitude > 180)
@@ -18,12 +17,30 @@ function Coordinates(Latitude, Longitude) {
         lat: Number(Latitude.toFixed(8)),
         long: Number(Longitude.toFixed(8)),
     };
-}
-function calculateDirection(currentLocation, previousLocation) {
+};
+export const calculateDirection = (currentLocation, previousLocation) => {
     let deltaLat = currentLocation.lat - previousLocation.lat, deltaLong = currentLocation.long - previousLocation.long, return_value = {
         direction: "",
         angle: 0,
-    }, calculate_angel = true, angle = 0;
+    }, angle = 0;
+    const determineDirectionName = () => {
+        return_value.angle = angle;
+        if (angle > directions.N.range[0] || angle < directions.N.range[1]) {
+            return_value.angle = return_value.angle % 360;
+            return_value.direction = directions.N.name;
+            return return_value;
+        }
+        for (const key in directions) {
+            if (Object.prototype.hasOwnProperty.call(directions, key)) {
+                const direction = directions[key];
+                if (direction.range[0] < angle && angle < direction.range[1]) {
+                    return_value.direction = direction.name;
+                    break;
+                }
+            }
+        }
+        return return_value;
+    };
     if (deltaLat == 0 || (deltaLong == 0 && deltaLat != 0)) {
         if (deltaLat == 0) {
             if (deltaLong > 0)
@@ -37,30 +54,24 @@ function calculateDirection(currentLocation, previousLocation) {
             else
                 angle = 180;
         }
-        calculate_angel = false;
+        return determineDirectionName();
     }
-    if (calculate_angel) {
-        angle =
-            90 -
-                Math.abs(Number(((Math.atan(deltaLat / deltaLong) / Math.PI) * 180).toFixed(0)));
-        if (deltaLat < 0) {
-            if (deltaLong > 0)
-                angle += 90;
-            else if (deltaLong < 0)
-                angle += 180;
-        }
-        else if (deltaLat > 0 && deltaLong < 0)
-            angle += 270;
+    angle =
+        90 -
+            Math.abs(Number(((Math.atan(deltaLat / deltaLong) / Math.PI) * 180).toFixed(0)));
+    if (deltaLat < 0) {
+        if (deltaLong > 0)
+            angle += 90;
+        else if (deltaLong < 0)
+            angle += 180;
     }
-    return_value.angle = angle;
-    for (const key in directions) {
-        if (Object.prototype.hasOwnProperty.call(directions, key)) {
-            const direction = directions[key];
-            if (direction.range[0] < angle && angle < direction.range[1]) {
-                return_value.direction = direction.name;
-                return return_value;
-            }
-        }
-    }
-}
-console.log(calculateDirection(Coordinates(41.40399, 2.17601), Coordinates(41.40338, 2.17403)));
+    else if (deltaLat > 0 && deltaLong < 0)
+        angle += 270;
+    return determineDirectionName();
+};
+// console.log(
+//     calculateDirection(
+//         Coordinates(41.40399, 2.17601),
+//         Coordinates(41.40338, 2.17403)
+//     )
+// );

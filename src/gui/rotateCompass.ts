@@ -1,19 +1,18 @@
-function Angle(angle: number) {
+const Angle = (angle: number): number => {
     if (-1 < angle && angle < 360) return Number(angle.toFixed(0));
     throw Error(`Angle should be in range [0, 359], not ${angle}`);
-}
+};
 
-function rotateCompass(
+const rotateCompass = (
     newAngle: number,
     previousAngle: number,
     duration = 0.5
-) {
+) => {
     if (newAngle == previousAngle) return;
     let multiplier = 0,
         difference = Math.abs(newAngle - previousAngle);
     const fps = 60,
-        frames = Number((duration * fps).toFixed(0)),
-        d_f = (difference / frames) * multiplier;
+        frames = Number((duration * fps).toFixed(0));
 
     if (newAngle > previousAngle) multiplier = 1;
     else if (newAngle < previousAngle) multiplier = -1;
@@ -23,6 +22,7 @@ function rotateCompass(
         multiplier *= -1;
     }
 
+    const d_f = (difference / frames) * multiplier;
     for (let index = 0; index < frames; index++)
         setTimeout(() => {
             previousAngle += d_f;
@@ -39,9 +39,9 @@ function rotateCompass(
 
         console.log(previousAngle);
     }, duration * 1000 + 1);
-}
+};
 
 let newAngle = Angle(10),
-    previousAngle = Angle(344);
+    previousAngle = Angle(340);
 
 rotateCompass(newAngle, previousAngle);
