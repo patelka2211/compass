@@ -1,3 +1,5 @@
+import { coords } from "./coordinates";
+
 type direction_id_and_range = {
     name: string;
     range: [number, number];
@@ -12,24 +14,6 @@ const directions: { [direction_name: string]: direction_id_and_range } = {
     SW: { name: "SW", range: [202.5, 247.5] },
     W: { name: "W", range: [247.5, 292.5] },
     NW: { name: "NW", range: [292.5, 337.5] },
-};
-
-export type coords = {
-    lat: number;
-    long: number;
-};
-
-export const Coordinates = (Latitude: number, Longitude: number): coords => {
-    if (Latitude < -90 || Latitude > 90)
-        throw Error(`Latitude must be range from -90 to 90. Not ${Latitude}`);
-    else if (Longitude < -180 || Longitude > 180)
-        throw Error(
-            `Longitude must be range from -180 to 180. Not ${Longitude}`
-        );
-    return {
-        lat: Number(Latitude.toFixed(8)),
-        long: Number(Longitude.toFixed(8)),
-    };
 };
 
 export const calculateDirection = (
@@ -84,6 +68,7 @@ export const calculateDirection = (
                 ((Math.atan(deltaLat / deltaLong) / Math.PI) * 180).toFixed(0)
             )
         );
+
     if (deltaLat < 0) {
         if (deltaLong > 0) angle += 90;
         else if (deltaLong < 0) angle += 180;
@@ -91,10 +76,3 @@ export const calculateDirection = (
 
     return determineDirectionName();
 };
-
-// console.log(
-//     calculateDirection(
-//         Coordinates(41.40399, 2.17601),
-//         Coordinates(41.40338, 2.17403)
-//     )
-// );

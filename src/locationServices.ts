@@ -1,19 +1,30 @@
-import { Coordinates, calculateDirection, coords } from "./direction";
+import { Coordinates, coords } from "./coordinates";
+import { calculateDirection } from "./direction";
 
 let previousLocation: { lat: number | null; long: number | null } = {
     lat: null,
     long: null,
 };
 
+let lock: boolean = false;
+
 export const onSuccess = (position: GeolocationPosition) => {
+    if (lock) return;
+
     if (previousLocation.lat == null || previousLocation.long == null) {
         previousLocation.lat = position.coords.latitude;
         previousLocation.long = position.coords.longitude;
 
+        // Update UI
         (document.getElementById("latitude") as HTMLDivElement).innerHTML =
             position.coords.latitude.toFixed(6);
         (document.getElementById("longitude") as HTMLDivElement).innerHTML =
             position.coords.longitude.toFixed(6);
+
+        // Lock for 2 seconds
+        setTimeout(() => {
+            lock = true;
+        }, 2000);
         return;
     }
 
@@ -27,13 +38,12 @@ export const onSuccess = (position: GeolocationPosition) => {
         previousLocation as coords
     );
 
-    console.log(
-        `Direction: ${direction.direction}, Angle: ${direction.angle}.`
-    );
+    // console.log(`Direction: ${direction.direction}, Angle: ${direction.angle}.`);
 
+    // Update current loction.
     previousLocation = currentLocation;
 
-    // console.log(position);
+    // Update UI
     (document.getElementById("latitude") as HTMLDivElement).innerHTML =
         position.coords.latitude.toFixed(6);
     (document.getElementById("longitude") as HTMLDivElement).innerHTML =
@@ -49,6 +59,11 @@ export const onSuccess = (position: GeolocationPosition) => {
     (
         document.getElementById("fetch-time") as HTMLDivElement
     ).innerHTML = `${time_now.getHours()}:${time_now.getMinutes()}:${time_now.getSeconds()}`;
+
+    // Lock for 2 seconds
+    setTimeout(() => {
+        lock = true;
+    }, 2000);
 };
 
 export const onFailure = (error: GeolocationPositionError) => {

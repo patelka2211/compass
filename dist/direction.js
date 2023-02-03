@@ -8,16 +8,6 @@ const directions = {
     W: { name: "W", range: [247.5, 292.5] },
     NW: { name: "NW", range: [292.5, 337.5] },
 };
-export const Coordinates = (Latitude, Longitude) => {
-    if (Latitude < -90 || Latitude > 90)
-        throw Error(`Latitude must be range from -90 to 90. Not ${Latitude}`);
-    else if (Longitude < -180 || Longitude > 180)
-        throw Error(`Longitude must be range from -180 to 180. Not ${Longitude}`);
-    return {
-        lat: Number(Latitude.toFixed(8)),
-        long: Number(Longitude.toFixed(8)),
-    };
-};
 export const calculateDirection = (currentLocation, previousLocation) => {
     let deltaLat = currentLocation.lat - previousLocation.lat, deltaLong = currentLocation.long - previousLocation.long, return_value = {
         direction: "",
@@ -69,9 +59,3 @@ export const calculateDirection = (currentLocation, previousLocation) => {
         angle += 270;
     return determineDirectionName();
 };
-// console.log(
-//     calculateDirection(
-//         Coordinates(41.40399, 2.17601),
-//         Coordinates(41.40338, 2.17403)
-//     )
-// );

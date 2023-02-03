@@ -1,23 +1,33 @@
-import { Coordinates, calculateDirection } from "./direction";
+import { Coordinates } from "./coordinates";
+import { calculateDirection } from "./direction";
 let previousLocation = {
     lat: null,
     long: null,
 };
+let lock = false;
 export const onSuccess = (position) => {
+    if (lock)
+        return;
     if (previousLocation.lat == null || previousLocation.long == null) {
         previousLocation.lat = position.coords.latitude;
         previousLocation.long = position.coords.longitude;
+        // Update UI
         document.getElementById("latitude").innerHTML =
             position.coords.latitude.toFixed(6);
         document.getElementById("longitude").innerHTML =
             position.coords.longitude.toFixed(6);
+        // Lock for 2 seconds
+        setTimeout(() => {
+            lock = true;
+        }, 2000);
         return;
     }
     let currentLocation = Coordinates(position.coords.latitude, position.coords.longitude);
     const direction = calculateDirection(currentLocation, previousLocation);
-    console.log(`Direction: ${direction.direction}, Angle: ${direction.angle}.`);
+    // console.log(`Direction: ${direction.direction}, Angle: ${direction.angle}.`);
+    // Update current loction.
     previousLocation = currentLocation;
-    // console.log(position);
+    // Update UI
     document.getElementById("latitude").innerHTML =
         position.coords.latitude.toFixed(6);
     document.getElementById("longitude").innerHTML =
@@ -28,6 +38,10 @@ export const onSuccess = (position) => {
         direction.angle.toString();
     const time_now = new Date();
     document.getElementById("fetch-time").innerHTML = `${time_now.getHours()}:${time_now.getMinutes()}:${time_now.getSeconds()}`;
+    // Lock for 2 seconds
+    setTimeout(() => {
+        lock = true;
+    }, 2000);
 };
 export const onFailure = (error) => {
     alert(error.message);
