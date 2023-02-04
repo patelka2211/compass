@@ -1,0 +1,36 @@
+@import "./window-content";
+
+@mixin compass_window {
+    #compass-window {
+        transition: all 0.2s ease;
+        width: 100vw;
+        height: calc(100vh - 100px);
+
+        max-width: calc(500px - 2px);
+        max-height: calc(756px - 2px);
+
+        border: 1px solid #28282829;
+        border-radius: 32px;
+        box-shadow: 0 8px 64px 0 #28282829;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        @include window_content();
+    }
+}
+
+@mixin compass_window_mobile {
+    #compass-window {
+        height: 100vh;
+
+        max-width: 100vw;
+        max-height: 100vh;
+
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+    }
+}

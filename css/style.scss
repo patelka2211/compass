@@ -1,142 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+@import "./compass-window";
 body {
+    font-family: "Inter", sans-serif;
     margin: 0;
-
-    #root-container {
+    #main-container {
         width: 100vw;
         height: 100vh;
-
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: space-around;
 
-        #compass-outer-container {
-            width: 100%;
-            height: calc(100% - 100px);
-            margin: 50px 0;
-            max-width: calc(500px - 2px);
-            max-height: calc(756px - 2px);
-
-            border: 1px solid #28282829;
-            border-radius: 32px;
-            box-shadow: 0 16px 64px 0 #28282829;
-
-            transition: all 0.2s ease;
-
-            #compass-inner-container {
-                width: calc(100% - 100px);
-                // height: calc(100% - 100px);
-                min-height: calc(100% - 100px);
-                max-height: calc(100% - 100px);
-                margin: 50px;
-                // height: calc(100% - 100px);
-                // padding: 10%;
-                // max-height: calc(100% - 100px);
-                overflow: auto;
-
-                // button {
-                //     width: 100%;
-                //     height: 50px;
-                // }
-
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-
-                #upper-div,
-                #lower-div {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                }
-
-                #upper-div {
-                    #direction-section {
-                        margin-bottom: 10px;
-                        font-size: 20px;
-
-                        opacity: 1;
-                        height: auto;
-
-                        &.hide {
-                            opacity: 0;
-                            height: 0;
-                        }
-                    }
-                    #icon-n-compass {
-                        width: 100%;
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        justify-content: space-around;
-
-                        transition: width 0.2s ease;
-                        // width: 64%;
-                        width: 128px;
-
-                        #compass-logo {
-                            opacity: 1;
-                            width: 100%;
-                        }
-
-                        #compass-svg {
-                            opacity: 0;
-                            width: 0;
-                        }
-
-                        #compass-logo,
-                        #compass-svg {
-                            transition: all 0.2s ease;
-                            // width: 100%;
-                            aspect-ratio: 1;
-                        }
-
-                        &.show-compass-svg {
-                            width: 64%;
-
-                            #compass-logo {
-                                opacity: 0;
-                                width: 0;
-                            }
-
-                            #compass-svg {
-                                opacity: 1;
-                                width: 100%;
-                            }
-                        }
-                    }
-                }
-                // #lower-div{}
-
-                button {
-                    width: 100%;
-                    height: 50px;
-                    border-radius: 16px;
-                    border: none;
-                    font-size: 18px;
-                    color: white;
-                    background-color: #007aff;
-                }
-            }
-        }
+        @include compass_window();
     }
 }
 
 @media (max-width: 600px) {
     body {
-        #root-container {
-            #compass-outer-container {
-                height: 100%;
-                max-width: 100vw;
-                max-height: 100vh;
-                border: none;
-                box-shadow: none;
-                margin: 0;
-                // #compass-inner-container{
-                // }
-            }
+        #main-container {
+            @include compass_window_mobile();
         }
     }
 }

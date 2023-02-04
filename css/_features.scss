@@ -1,0 +1,56 @@
+@mixin feature {
+    .feature {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 6px 0;
+
+        .feature-icon {
+            width: 50px;
+            min-height: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-around;
+
+            svg,
+            img {
+                width: 40px;
+                aspect-ratio: 1;
+            }
+
+            img {
+                border-radius: 10px;
+                border-radius: 50%;
+            }
+        }
+
+        .feature-content {
+            width: calc(100% - 60px);
+            // height: 50px;
+            display: flex;
+            flex-direction: column;
+            // justify-content: space-between;
+
+            .feature-title {
+                font-size: 16px;
+                font-weight: 500;
+
+                a {
+                    color: black;
+                    text-decoration: none;
+                }
+            }
+
+            .feature-description {
+                font-size: 14px;
+                color: #909090;
+                a {
+                    color: #909090;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

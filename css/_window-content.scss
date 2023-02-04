@@ -1,0 +1,18 @@
+@import "./frame-content";
+@import "./frame-btns";
+
+@mixin window_content {
+    #window-content {
+        width: 80%;
+        height: calc(100% - 100px);
+        margin: 10%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        @include frame_content();
+        @include frame_btns();
+    }
+}
