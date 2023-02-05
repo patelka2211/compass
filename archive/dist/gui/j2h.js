@@ -7,7 +7,9 @@ class json2html {
         this.list.push(input);
         return this;
     }
-    render(input = this.list, root = this.root) {
+    render(input = this.list, root = this.root, clearRoot = true) {
+        if (clearRoot)
+            root.innerHTML = "";
         input.forEach((item) => {
             for (const key in item) {
                 if (Object.prototype.hasOwnProperty.call(item, key)) {
@@ -15,14 +17,14 @@ class json2html {
                     const value = item[key];
                     j2h.setAttribute(element, value[0]);
                     if (typeof value[1] == "string") {
-                        element.innerText = value[1];
+                        element.innerHTML = value[1];
                     }
                     else if (typeof value[1] == "object") {
                         if (value[1].length === undefined) {
-                            this.render([value[1]], element);
+                            this.render([value[1]], element, false);
                         }
                         else if (value[1].length !== undefined) {
-                            this.render(value[1], element);
+                            this.render(value[1], element, false);
                         }
                     }
                     root.appendChild(element);

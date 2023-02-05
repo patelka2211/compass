@@ -16,19 +16,21 @@
             font-size: 16px;
             font-weight: 500;
             // padding: 0;
-        }
-
-        #subscribe-updates {
             &:hover {
                 cursor: pointer;
             }
+            color: white;
+            background-color: rgb(52, 121, 246);
+        }
 
+        #toggle-updates {
+            transition: all 0.2s ease;
             &.disable {
-                color: black;
-                background-color: aliceblue;
-                pointer-events: none;
+                background-color: rgb(239, 239, 239);
+                color: rgba(40, 40, 40, 0.5);
+                // pointer-events: none;
                 &:hover {
-                    cursor: none;
+                    cursor: help;
                 }
             }
         }
@@ -38,16 +40,16 @@
             height: 0;
             opacity: 0;
             padding: 0;
-
             color: transparent;
             background-color: rgba(52, 121, 246, 0.08);
-
+            pointer-events: none;
             margin: 0px;
             &.show {
                 margin-top: 10px;
                 height: 50px;
                 opacity: 1;
                 color: rgb(52, 121, 246);
+                pointer-events: all;
             }
         }
     }

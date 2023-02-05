@@ -1,0 +1,18 @@
+@import "./features";
+
+@mixin root_frame {
+    #compass-logo {
+        width: 96px;
+        aspect-ratio: 1;
+    }
+
+    #greetings {
+        font-size: 30px;
+        text-align: center;
+        margin: 16px 6px;
+        margin-bottom: 50px;
+        font-weight: 600;
+    }
+
+    @include feature();
+}

@@ -144,8 +144,10 @@ class json2html {
     }
     render(
         input: ValidPair[] = this.list,
-        root: HTMLElement = this.root
+        root: HTMLElement = this.root,
+        clearRoot: boolean = true
     ): void {
+        if (clearRoot) root.innerHTML = "";
         input.forEach((item) => {
             for (const key in item) {
                 if (Object.prototype.hasOwnProperty.call(item, key)) {
@@ -155,16 +157,24 @@ class json2html {
                     j2h.setAttribute(element, value[0]);
 
                     if (typeof value[1] == "string") {
-                        element.innerText = value[1];
+                        element.innerHTML = value[1];
                     } else if (
                         typeof (value[1] as ValidPair | ValidPair[]) == "object"
                     ) {
                         if ((value[1] as ValidPair).length === undefined) {
-                            this.render([value[1] as ValidPair], element);
+                            this.render(
+                                [value[1] as ValidPair],
+                                element,
+                                false
+                            );
                         } else if (
                             (value[1] as ValidPair[]).length !== undefined
                         ) {
-                            this.render(value[1] as ValidPair[], element);
+                            this.render(
+                                value[1] as ValidPair[],
+                                element,
+                                false
+                            );
                         }
                     }
 

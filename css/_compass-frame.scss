@@ -1,0 +1,19 @@
+@mixin compass_frame {
+    #direction-angle {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    #compass-element {
+        margin: 10px 0;
+        width: 84%;
+        aspect-ratio: 1;
+        position: relative;
+
+        svg {
+            width: 100%;
+            aspect-ratio: 1;
+            position: absolute;
+        }
+    }
+}
