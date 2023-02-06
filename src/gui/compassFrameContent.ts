@@ -1,4 +1,3 @@
-import { startLocationWatcher } from "../locationWatcher";
 import compassDirections from "./assets/compassDirections";
 import compassGraphics from "./assets/compassGraphics";
 import elements from "./elements";

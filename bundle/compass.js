@@ -1,115 +1,3 @@
-var elements = {
-    direction_angle: () => {
-        return document.getElementById("direction-angle");
-    },
-    compass_arcs: () => {
-        return document.getElementById("compass-arcs");
-    },
-    compass_direction: () => {
-        return document.getElementById("compass-direction");
-    },
-    direction_n: () => {
-        return document.getElementById("direction-n");
-    },
-    direction_s: () => {
-        return document.getElementById("direction-s");
-    },
-    direction_e: () => {
-        return document.getElementById("direction-e");
-    },
-    direction_w: () => {
-        return document.getElementById("direction-w");
-    },
-    frame_content: () => {
-        return document.getElementById("frame-content");
-    },
-    toggle_updates: () => {
-        return document.getElementById("toggle-updates");
-    },
-    Developed_by_KP: () => {
-        return document.getElementById("Developed-by-KP");
-    },
-};
-
-const Coordinates = (Latitude, Longitude) => {
-    if (Latitude < -90 || Latitude > 90)
-        throw Error(`Latitude must be range from -90 to 90. Not ${Latitude}`);
-    else if (Longitude < -180 || Longitude > 180)
-        throw Error(`Longitude must be range from -180 to 180. Not ${Longitude}`);
-    return {
-        lat: Number(Latitude.toFixed(8)),
-        long: Number(Longitude.toFixed(8)),
-    };
-};
-
-const directions = {
-    N: { name: "N", range: [337.5, 22.5] },
-    NE: { name: "NE", range: [22.5, 67.5] },
-    E: { name: "E", range: [67.5, 112.5] },
-    SE: { name: "SE", range: [112.5, 157.5] },
-    S: { name: "S", range: [157.5, 202.5] },
-    SW: { name: "SW", range: [202.5, 247.5] },
-    W: { name: "W", range: [247.5, 292.5] },
-    NW: { name: "NW", range: [292.5, 337.5] },
-};
-const determineDirectionName = (angle) => {
-    let direction_n_angle = {
-        direction: "",
-        angle: 0,
-    };
-    direction_n_angle.angle = angle;
-    if (angle > directions.N.range[0] || angle < directions.N.range[1]) {
-        direction_n_angle.angle = direction_n_angle.angle % 360;
-        direction_n_angle.direction = directions.N.name;
-        return direction_n_angle;
-    }
-    for (const key in directions) {
-        if (Object.prototype.hasOwnProperty.call(directions, key)) {
-            const direction = directions[key];
-            if (direction.range[0] < angle && angle < direction.range[1]) {
-                direction_n_angle.direction = direction.name;
-                break;
-            }
-        }
-    }
-    return direction_n_angle;
-};
-const calculateDirection = (currentLocation, previousLocation) => {
-    let deltaLat = currentLocation.lat - previousLocation.lat, deltaLong = currentLocation.long - previousLocation.long, 
-    // direction_n_angle: { direction: string; angle: number } = {
-    //     direction: "",
-    //     angle: 0,
-    // },
-    angle = 0;
-    if (deltaLat == 0 || (deltaLong == 0 && deltaLat != 0)) {
-        if (deltaLat == 0) {
-            if (deltaLong > 0)
-                angle = 90;
-            else
-                angle = 270;
-        }
-        if (deltaLong == 0) {
-            if (deltaLat > 0)
-                angle = 0;
-            else
-                angle = 180;
-        }
-        return determineDirectionName(angle);
-    }
-    angle =
-        90 -
-            Math.abs(Number(((Math.atan(deltaLat / deltaLong) / Math.PI) * 180).toFixed(0)));
-    if (deltaLat < 0) {
-        if (deltaLong > 0)
-            angle += 90;
-        else if (deltaLong < 0)
-            angle += 180;
-    }
-    else if (deltaLat > 0 && deltaLong < 0)
-        angle += 270;
-    return determineDirectionName(angle);
-};
-
 var compassDirections = `<svg id="compass-direction" viewBox="0 0 1656 1656" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path id="direction-n" d="M863.327 201.727V289H849.264L808.142 229.554H807.418V289H791.608V201.727H805.756L846.835 261.216H847.602V201.727H863.327Z" fill="black"/>
                     <path id="direction-s" d="M845.037 1390.72C844.639 1387 842.963 1384.1 840.009 1382.03C837.082 1379.95 833.276 1378.91 828.588 1378.91C825.293 1378.91 822.466 1379.41 820.108 1380.41C817.75 1381.4 815.946 1382.75 814.696 1384.45C813.446 1386.16 812.807 1388.11 812.778 1390.29C812.778 1392.11 813.19 1393.69 814.014 1395.02C814.866 1396.36 816.017 1397.49 817.466 1398.43C818.915 1399.34 820.52 1400.11 822.281 1400.73C824.043 1401.36 825.818 1401.88 827.608 1402.31L835.79 1404.36C839.085 1405.12 842.253 1406.16 845.293 1407.47C848.361 1408.77 851.102 1410.42 853.517 1412.41C855.96 1414.4 857.892 1416.8 859.312 1419.61C860.733 1422.42 861.443 1425.72 861.443 1429.5C861.443 1434.61 860.136 1439.11 857.523 1443.01C854.909 1446.87 851.131 1449.89 846.188 1452.08C841.273 1454.24 835.321 1455.32 828.332 1455.32C821.543 1455.32 815.648 1454.27 810.648 1452.17C805.676 1450.07 801.784 1447 798.972 1442.96C796.188 1438.93 794.682 1434.01 794.455 1428.22H810.009C810.236 1431.26 811.173 1433.79 812.821 1435.8C814.469 1437.82 816.614 1439.33 819.256 1440.32C821.926 1441.32 824.909 1441.81 828.205 1441.81C831.642 1441.81 834.653 1441.3 837.239 1440.28C839.852 1439.23 841.898 1437.78 843.375 1435.93C844.852 1434.06 845.605 1431.87 845.634 1429.37C845.605 1427.1 844.938 1425.22 843.631 1423.74C842.324 1422.24 840.491 1420.99 838.134 1419.99C835.804 1418.97 833.077 1418.06 829.952 1417.27L820.023 1414.71C812.835 1412.86 807.153 1410.07 802.977 1406.32C798.83 1402.54 796.756 1397.52 796.756 1391.27C796.756 1386.13 798.148 1381.63 800.932 1377.76C803.744 1373.9 807.565 1370.9 812.395 1368.77C817.224 1366.61 822.693 1365.53 828.801 1365.53C834.994 1365.53 840.42 1366.61 845.08 1368.77C849.767 1370.9 853.446 1373.87 856.116 1377.68C858.787 1381.46 860.165 1385.8 860.25 1390.72H845.037Z" fill="black"/>
@@ -129,6 +17,18 @@ var compassGraphics = `<svg id="compass-graphics" viewBox="0 0 1656 1656" fill="
                     </linearGradient>
                     </defs>
                 </svg>`;
+
+var elements = {
+    toggle_updates: () => {
+        return document.getElementById("toggle-updates");
+    },
+    frame_content: () => {
+        return document.getElementById("frame-content");
+    },
+    credits_btn: () => {
+        return document.getElementById("Developed-by-KP");
+    },
+};
 
 class json2html {
     constructor(root) {
@@ -266,162 +166,70 @@ const set_root_frame_content = () => {
     frame_content.render();
 };
 
-const Angle = (angle) => {
-    if (0 <= angle && angle < 360)
-        return Number(angle.toFixed(0));
-    throw Error(`Angle should be in range [0, 359], not ${angle}`);
-};
-const rotateGraphics = (angle) => {
-    [
-        elements.direction_n(),
-        elements.direction_s(),
-        elements.direction_e(),
-        elements.direction_w(),
-    ].forEach((element) => {
-        element.style.transform = `rotate(-${angle}deg)`;
-    });
-    [elements.compass_direction(), elements.compass_arcs()].forEach((element) => {
-        element.style.transform = `rotate(${angle}deg)`;
-    });
-};
-const rotateCompass = (newAngle, previousAngle, duration = 1) => {
-    if (newAngle == previousAngle)
+let watcher, watching = false, previousPosition, lock = false;
+const onSuccess = (position) => {
+    if (lock)
         return;
-    let multiplier = 0, difference = Math.abs(newAngle - previousAngle);
-    const fps = 60, frames = Number((duration * fps).toFixed(0));
-    if (newAngle > previousAngle)
-        multiplier = 1;
-    else if (newAngle < previousAngle)
-        multiplier = -1;
-    if (difference > 180) {
-        difference = 360 - difference;
-        multiplier *= -1;
-    }
-    const d_f = (difference / frames) * multiplier;
-    for (let index = 0; index < frames; index++)
-        setTimeout(() => {
-            previousAngle += d_f;
-            if (previousAngle < 0)
-                previousAngle += 360;
-            else if (previousAngle >= 360)
-                previousAngle %= 360;
-            // console.log(previousAngle.toFixed(1), index);
-            elements.direction_angle().innerHTML = ((angle) => {
-                return `${angle}<sup>o</sup> ${determineDirectionName(Number(angle)).direction}`;
-            })(previousAngle.toFixed(0));
-            rotateGraphics(previousAngle.toFixed(1));
-        }, index * (1000 / fps));
+    lock = true;
     setTimeout(() => {
-        previousAngle = Number(previousAngle.toFixed(0));
-        if (previousAngle < 0)
-            previousAngle += 360;
-        else if (previousAngle >= 360)
-            previousAngle %= 360;
-        elements.direction_angle().innerHTML = ((angle) => {
-            return `${angle}<sup>o</sup> ${determineDirectionName(angle).direction}`;
-        })(previousAngle);
-        rotateGraphics(previousAngle);
-        // console.log(previousAngle);
-    }, duration * 1000 + 1);
-};
-// let newAngle = Angle(10),
-//     previousAngle = Angle(340);
-// rotateCompass(newAngle, previousAngle);
-
-let watcher;
-let watching = false;
-let previousLocation = {
-    lat: null,
-    long: null,
-};
-let lock = false;
-let previousAngle = 0;
-const startLocationWatcher = () => {
-    if (navigator.geolocation) {
-        watcher = navigator.geolocation.watchPosition((position) => {
-            if (lock)
-                return;
-            if (!watching) {
-                watching = true;
-                compassState();
-            }
-            if (previousLocation.lat === null ||
-                previousLocation.long === null) {
-                previousLocation.lat = position.coords.latitude;
-                previousLocation.long = position.coords.longitude;
-                setTimeout(() => {
-                    lock = true;
-                }, 2000);
-            }
-            let currentLocation = Coordinates(position.coords.latitude, position.coords.longitude);
-            const direction = calculateDirection(currentLocation, previousLocation);
-            // Update UI
-            rotateCompass(Angle(direction.angle), Angle(previousAngle));
-            // console.log(position.coords);
-            // Update current location
-            previousLocation = currentLocation;
-            // Update current angle
-            previousAngle = direction.angle;
-            setTimeout(() => {
-                lock = true;
-            }, 2000);
-        }, (error) => {
-            stopLocationWatcher();
-            ((element) => {
-                element.classList.add("disable");
-                element.innerText = "You denied Geolocation";
-                element.onclick = () => {
-                    alert("You denied Geolocation");
-                };
-            })(elements.toggle_updates());
-        }, {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0,
-        });
-        console.log(watcher);
-    }
-    else {
+        lock = false;
+    }, 2000);
+    if (!watching) {
+        watching = true;
+        set_compass_frame_content();
         ((element) => {
-            element.classList.add("disable");
-            element.innerText = "Location access is prohibited";
-            element.onclick = () => {
-                alert("Your browser does not support location services.");
-            };
+            element.innerHTML = "Stop";
+            element.onclick = stopWatcher;
         })(elements.toggle_updates());
+        elements.credits_btn().classList.add("show");
     }
+    console.log(previousPosition);
+    let currentPosition = {
+        lat: position.coords.latitude,
+        long: position.coords.longitude,
+    };
+    if (previousPosition === undefined) {
+        previousPosition = currentPosition;
+        return;
+    }
+    previousPosition = currentPosition;
+    // console.log("update");
+    // console.log(position.coords);
 };
-const stopLocationWatcher = () => {
-    console.log("Stopped watching");
-    navigator.geolocation.clearWatch(watcher);
+const onFailure = (error) => {
+    ((element) => {
+        element.classList.add("disable");
+        element.innerText = error.message;
+        element.onclick = () => {
+            alert(error.message);
+        };
+    })(elements.toggle_updates());
     watching = false;
 };
-const rootState = () => {
-    elements.toggle_updates().innerHTML = "Start again";
-    elements.toggle_updates().onclick = startLocationWatcher;
-    elements.Developed_by_KP().classList.remove("show");
+const stopWatcher = () => {
+    navigator.geolocation.clearWatch(watcher);
+    elements.credits_btn().classList.remove("show");
+    ((element) => {
+        element.onclick = startWatcher;
+        element.innerText = "Start again";
+    })(elements.toggle_updates());
     set_root_frame_content();
-    stopLocationWatcher();
+    watching = false;
 };
-const compassState = () => {
-    elements.toggle_updates().innerHTML = "Stop";
-    elements.toggle_updates().onclick = rootState;
-    elements.Developed_by_KP().classList.add("show");
-    set_compass_frame_content();
+const startWatcher = () => {
+    watcher = navigator.geolocation.watchPosition(onSuccess, onFailure, {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 5000,
+    });
 };
-
-let toggle_updates = elements.toggle_updates();
-elements.Developed_by_KP();
-// toggle_updates.onclick = () => {
-//     if (Developed_by_KP_btn.classList.contains("show")) {
-//         toggle_updates.innerText = "Start again";
-//         Developed_by_KP_btn.classList.toggle("show");
-//         set_root_frame_content();
-//         stopLocationWatcher();
-//     } else {
-//         toggle_updates.innerText = "Stop";
-//         Developed_by_KP_btn.classList.toggle("show");
-//         set_compass_frame_content();
-//     }
-// };
-toggle_updates.onclick = startLocationWatcher;
+if (navigator.geolocation) {
+    elements.toggle_updates().onclick = startWatcher;
+}
+else {
+    elements.toggle_updates().classList.add("disable");
+    elements.toggle_updates().innerText = "Browser not supported";
+    elements.toggle_updates().onclick = () => {
+        alert("Your browser does not support location access.");
+    };
+}
