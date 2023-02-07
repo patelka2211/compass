@@ -18,9 +18,7 @@
 
 # Description
 
-Measure direction using GPS.
-
-Currently under development.
+A GPS-based compass for navigation and direction finding.
 
 # About languages
 
