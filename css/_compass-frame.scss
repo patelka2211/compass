@@ -2,11 +2,18 @@
     #direction-angle {
         margin-bottom: 10px;
         font-size: 20px;
+        color: black;
+
+        transition: color 0.2s ease;
+
+        &.updating {
+            color: #6a6a6a52;
+        }
     }
 
     #compass-element {
         margin: 10px 0;
-        width: 84%;
+        width: 70.5%;
         aspect-ratio: 1;
         position: relative;
 
@@ -14,6 +21,46 @@
             width: 100%;
             aspect-ratio: 1;
             position: absolute;
+        }
+        #compass-direction {
+            transform-box: fill-box;
+            transform-origin: center;
+
+            #direction-n,
+            #direction-s,
+            #direction-e,
+            #direction-w {
+                transform-box: fill-box;
+                transform-origin: center;
+            }
+
+            transition: fill 0.2s ease;
+            &.updating {
+                #direction-n,
+                #direction-s,
+                #direction-e,
+                #direction-w {
+                    fill: #6a6a6a;
+                }
+            }
+        }
+
+        #compass-graphics {
+            transform-box: fill-box;
+            transform-origin: center;
+
+            #compass-arcs {
+                transform-box: fill-box;
+                transform-origin: center;
+            }
+
+            transition: fill 0.2s ease, stop-color 0.2s ease;
+
+            &.updating {
+                #compass-arcs {
+                    fill: #6a6a6a;
+                }
+            }
         }
     }
 }

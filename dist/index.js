@@ -1,16 +1,18 @@
+import { calculateDirection } from "./calculateDirection";
 import { set_compass_frame_content } from "./gui/compassFrameContent";
 import elements from "./gui/elements";
 import { set_root_frame_content } from "./gui/rootFrameContent";
-let watcher, watching = false, previousPosition, previousAngle = 0, lock = false;
+import { isWatching, rotateCompass, startWatching, stopWatching, } from "./gui/rotateCompass";
+let watcher, previousPosition, previousAngle = 0, lock = false;
 const onSuccess = (position) => {
     if (lock)
         return;
     lock = true;
     setTimeout(() => {
         lock = false;
-    }, 2000);
-    if (!watching) {
-        watching = true;
+    }, 1600);
+    if (!isWatching()) {
+        startWatching();
         set_compass_frame_content();
         ((element) => {
             element.innerHTML = "Stop";
@@ -18,8 +20,7 @@ const onSuccess = (position) => {
         })(elements.toggle_updates());
         elements.credits_btn().classList.add("show");
     }
-    console.log(previousPosition);
-    let currentPosition = {
+    const currentPosition = {
         lat: position.coords.latitude,
         long: position.coords.longitude,
     };
@@ -27,19 +28,23 @@ const onSuccess = (position) => {
         previousPosition = currentPosition;
         return;
     }
+    const direction = calculateDirection(currentPosition, previousPosition);
+    if (direction === null)
+        return;
+    rotateCompass(direction.angle, previousAngle);
     previousPosition = currentPosition;
-    // console.log("update");
-    // console.log(position.coords);
+    previousAngle = direction.angle;
 };
 const onFailure = (error) => {
+    navigator.geolocation.clearWatch(watcher);
     ((element) => {
         element.classList.add("disable");
-        element.innerText = error.message;
+        element.innerText = "No access to the location";
         element.onclick = () => {
             alert(error.message);
         };
     })(elements.toggle_updates());
-    watching = false;
+    stopWatching();
 };
 const stopWatcher = () => {
     navigator.geolocation.clearWatch(watcher);
@@ -49,7 +54,7 @@ const stopWatcher = () => {
         element.innerText = "Start again";
     })(elements.toggle_updates());
     set_root_frame_content();
-    watching = false;
+    stopWatching();
 };
 const startWatcher = () => {
     watcher = navigator.geolocation.watchPosition(onSuccess, onFailure, {
@@ -65,6 +70,6 @@ else {
     elements.toggle_updates().classList.add("disable");
     elements.toggle_updates().innerText = "Browser not supported";
     elements.toggle_updates().onclick = () => {
-        alert("Your browser does not support location access.");
+        alert("Location access is not supported by your browser.");
     };
 }

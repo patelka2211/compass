@@ -18,11 +18,11 @@ export const set_root_frame_content = () => {
             j2h.element("div", { class: "feature" }, [
                 j2h.element("div", { class: "feature-icon" }, directionIcon),
                 j2h.element("div", { class: "feature-content" }, [
-                    j2h.element("div", { class: "feature-title" }, "Direction"),
+                    j2h.element("div", { class: "feature-title" }, "Navigate"),
                     j2h.element(
                         "div",
                         { class: "feature-description" },
-                        "Measure direction using GPS."
+                        "A GPS-based compass for navigation and direction finding."
                     ),
                 ]),
             ])

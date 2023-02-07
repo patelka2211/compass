@@ -22,3 +22,10 @@ body {
         }
     }
 }
+@media (max-height: 600px) {
+    body {
+        #main-container {
+            @include compass_window_mobile();
+        }
+    }
+}
