@@ -22,7 +22,7 @@ export const set_root_frame_content = () => {
                     j2h.element(
                         "div",
                         { class: "feature-description" },
-                        "A GPS-based compass for navigation and direction finding."
+                        "GPS-based compass for navigation and direction finding."
                     ),
                 ]),
             ])
@@ -50,7 +50,8 @@ export const set_root_frame_content = () => {
                     ),
                 ]),
             ])
-        );
+        )
+        .append(j2h.element("div", { id: "feedback-btn" }, "Give Feedback"));
 
     frame_content.render();
 };

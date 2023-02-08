@@ -20,7 +20,10 @@ const toggleColors = () => {
     (
         [
             elements.direction_angle(),
-            elements.compass_direction(),
+            elements.direction_n(),
+            elements.direction_s(),
+            elements.direction_e(),
+            elements.direction_w(),
             elements.compass_graphics(),
         ] as HTMLElement[]
     ).forEach((element) => {

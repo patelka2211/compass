@@ -18,7 +18,7 @@
 
 # Description
 
-A GPS-based compass for navigation and direction finding.
+GPS-based compass for navigation and direction finding.
 
 # About languages
 

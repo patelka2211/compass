@@ -1,6 +1,7 @@
 import { calculateDirection } from "./calculateDirection";
 import { set_compass_frame_content } from "./gui/compassFrameContent";
 import elements from "./gui/elements";
+import { set_feedback_frame_content } from "./gui/feedbackFrameContent";
 import { set_root_frame_content } from "./gui/rootFrameContent";
 import { isWatching, rotateCompass, startWatching, stopWatching, } from "./gui/rotateCompass";
 let watcher, previousPosition, previousAngle = 0, lock = false;
@@ -54,6 +55,7 @@ const stopWatcher = () => {
         element.innerText = "Start again";
     })(elements.toggle_updates());
     set_root_frame_content();
+    elements.feedback_btn().onclick = openFeedbackForm;
     stopWatching();
 };
 const startWatcher = () => {
@@ -62,6 +64,17 @@ const startWatcher = () => {
         maximumAge: 0,
         timeout: 5000,
     });
+};
+const openFeedbackForm = () => {
+    elements.toggle_updates().onclick = closeFeedbackForm;
+    elements.toggle_updates().innerText = "Done";
+    set_feedback_frame_content();
+};
+const closeFeedbackForm = () => {
+    elements.toggle_updates().onclick = startWatcher;
+    elements.toggle_updates().innerText = "Start again";
+    set_root_frame_content();
+    elements.feedback_btn().onclick = openFeedbackForm;
 };
 if (navigator.geolocation) {
     elements.toggle_updates().onclick = startWatcher;

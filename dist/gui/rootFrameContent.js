@@ -14,7 +14,7 @@ export const set_root_frame_content = () => {
         j2h.element("div", { class: "feature-icon" }, directionIcon),
         j2h.element("div", { class: "feature-content" }, [
             j2h.element("div", { class: "feature-title" }, "Navigate"),
-            j2h.element("div", { class: "feature-description" }, "A GPS-based compass for navigation and direction finding."),
+            j2h.element("div", { class: "feature-description" }, "GPS-based compass for navigation and direction finding."),
         ]),
     ]))
         .append(j2h.element("div", { class: "feature" }, [
@@ -26,6 +26,7 @@ export const set_root_frame_content = () => {
             j2h.element("div", { class: "feature-title" }, `<a href="https://github.com/patelka2211">Developer</a>`),
             j2h.element("div", { class: "feature-description" }, `<a href="https://github.com/patelka2211">Developed in India with ❤️ by <strong>KP</strong></a>`),
         ]),
-    ]));
+    ]))
+        .append(j2h.element("div", { id: "feedback-btn" }, "Give Feedback"));
     frame_content.render();
 };

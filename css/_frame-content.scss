@@ -1,4 +1,5 @@
 @import "./compass-frame";
+@import "./feedback-frame";
 @import "./root-frame";
 
 @mixin frame_content {
@@ -15,5 +16,6 @@
 
         @include root_frame();
         @include compass_frame();
+        @include feedback_frame();
     }
 }

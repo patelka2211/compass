@@ -1,0 +1,7 @@
+@mixin feedback_frame {
+    #feedback-frame {
+        width: 100%;
+        height: calc(100% - 10px);
+        border-radius: 16px;
+    }
+}

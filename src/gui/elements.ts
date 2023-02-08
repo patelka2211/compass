@@ -32,4 +32,10 @@ export default {
     credits_btn: () => {
         return document.getElementById("Developed-by-KP") as HTMLElement;
     },
+    feedback_frame: () => {
+        return document.getElementById("feedback-frame") as HTMLElement;
+    },
+    feedback_btn: () => {
+        return document.getElementById("feedback-btn") as HTMLElement;
+    },
 };
