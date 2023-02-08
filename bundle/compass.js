@@ -199,7 +199,7 @@ window.onload = () => {
                 "iframe",
                 {
                     id: "feedback-frame",
-                    src: "https://forms.gle/zccmjUY2tjzoaVRr5",
+                    src: "https://docs.google.com/forms/d/e/1FAIpQLScZ5Wc7cxEdVN6Hzjm6JMNkozUgD97pLhhXlaZj_uS1DiQD0A/viewform",
                     frameborder: 0,
                     marginheight: 0,
                     marginwidth: 0,
@@ -283,10 +283,7 @@ window.onload = () => {
     const toggleColors = () => {
         [
             elements.direction_angle(),
-            elements.direction_n(),
-            elements.direction_s(),
-            elements.direction_e(),
-            elements.direction_w(),
+            elements.compass_direction(),
             elements.compass_graphics(),
         ].forEach((element) => {
             element.classList.toggle("updating");

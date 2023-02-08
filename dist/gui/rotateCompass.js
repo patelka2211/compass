@@ -14,10 +14,7 @@ export const Angle = (angle) => {
 const toggleColors = () => {
     [
         elements.direction_angle(),
-        elements.direction_n(),
-        elements.direction_s(),
-        elements.direction_e(),
-        elements.direction_w(),
+        elements.compass_direction(),
         elements.compass_graphics(),
     ].forEach((element) => {
         element.classList.toggle("updating");

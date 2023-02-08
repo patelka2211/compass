@@ -32,9 +32,14 @@
             #direction-w {
                 transform-box: fill-box;
                 transform-origin: center;
-
                 transition: fill 0.2s ease;
-                &.updating {
+            }
+
+            &.updating {
+                #direction-n,
+                #direction-s,
+                #direction-e,
+                #direction-w {
                     fill: #6b6b6b52;
                 }
             }
