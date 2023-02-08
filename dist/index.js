@@ -12,6 +12,10 @@ const onSuccess = (position) => {
     setTimeout(() => {
         lock = false;
     }, 1600);
+    const currentPosition = {
+        lat: Number(position.coords.latitude.toFixed(5)),
+        long: Number(position.coords.longitude.toFixed(5)),
+    };
     if (!isWatching()) {
         startWatching();
         set_compass_frame_content();
@@ -20,12 +24,6 @@ const onSuccess = (position) => {
             element.onclick = stopWatcher;
         })(elements.toggle_updates());
         elements.credits_btn().classList.add("show");
-    }
-    const currentPosition = {
-        lat: position.coords.latitude,
-        long: position.coords.longitude,
-    };
-    if (previousPosition === undefined) {
         previousPosition = currentPosition;
         return;
     }

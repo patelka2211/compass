@@ -13,7 +13,7 @@ export const set_root_frame_content = () => {
                 alt: "Compass Logo",
             })
         )
-        .append(j2h.element("p", { id: "greetings" }, "Welcome to Compass"))
+        .append(j2h.element("p", { id: "greetings" }, "Compass by KP"))
         .append(
             j2h.element("div", { class: "feature" }, [
                 j2h.element("div", { class: "feature-icon" }, directionIcon),

@@ -1,4 +1,4 @@
-export default {
+const elements = {
     direction_angle: () => {
         return document.getElementById("direction-angle");
     },
@@ -39,3 +39,4 @@ export default {
         return document.getElementById("feedback-btn");
     },
 };
+export default elements;

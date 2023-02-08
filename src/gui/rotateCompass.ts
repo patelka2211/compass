@@ -58,9 +58,6 @@ export const rotateCompass = (
 
     let multiplier = 0,
         difference = Math.abs(newAngle - previousAngle);
-    const fps = 60,
-        frames = Number((duration * fps).toFixed(0)),
-        miliseconds = duration * 1000;
 
     if (newAngle > previousAngle) multiplier = 1;
     else if (newAngle < previousAngle) multiplier = -1;
@@ -70,7 +67,11 @@ export const rotateCompass = (
         multiplier *= -1;
     }
 
-    const d_f = (difference / frames) * multiplier;
+    const fps = 90,
+        frames = Number((duration * fps).toFixed(0)),
+        miliseconds = duration * 1000,
+        d_f = (difference / frames) * multiplier;
+
     for (let index = 0; index < frames; index++)
         setTimeout(() => {
             if (!watching) return;
@@ -89,7 +90,6 @@ export const rotateCompass = (
 
     setTimeout(() => {
         if (!watching) return;
-
         toggleColors();
     }, miliseconds - 200);
 
