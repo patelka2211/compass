@@ -51,7 +51,32 @@ export const set_root_frame_content = () => {
                 ]),
             ])
         )
-        .append(j2h.element("div", { id: "feedback-btn" }, "Give Feedback"));
-
+        .append(
+            j2h.element(
+                "div",
+                {
+                    id: "share-n-feedback",
+                },
+                [
+                    j2h.element(
+                        "div",
+                        {
+                            id: "sharer-btn",
+                            onclick:
+                                "try { sharer.open(); } catch { alert('It appears that the Sharer module has not been fully loaded at this time.'); }",
+                        },
+                        "Share this page"
+                    ),
+                    j2h.element("div", { class: "separator" }, "•"),
+                    j2h.element(
+                        "div",
+                        {
+                            id: "feedback-btn",
+                        },
+                        "Give feedback"
+                    ),
+                ]
+            )
+        );
     frame_content.render();
 };

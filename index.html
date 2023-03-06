@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compass by KP</title>
+    <script id="sharer_iife_script" src="https://patelka2211.github.io/sharer/bundle/sharer.iife.min.js"></script>
     <link rel="shortcut icon" href="./assets/compass-logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./bundle/compass.min.js"></script>
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="Compass by KP" />
@@ -72,6 +74,11 @@
                             </div>
                         </div>
                     </div>
+                    <div id="share-n-feedback">
+                        <div id="sharer-btn"
+                            onclick="try { sharer.open(); } catch { alert('It appears that the Sharer module has not been fully loaded at this time.'); }">
+                            Share this page</div>
+                    </div>
                 </div>
                 <div id="frame-btns">
                     <button id="toggle-updates">Allow location access</button>
@@ -82,6 +89,5 @@
         </div>
     </div>
 </body>
-<script src="./bundle/compass.min.js"></script>
 
 </html>

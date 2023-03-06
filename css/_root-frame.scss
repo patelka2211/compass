@@ -16,15 +16,23 @@
 
     @include feature();
 
-    #feedback-btn {
-        margin: 10px 0;
-        padding: 4px 6px;
-        color: rgb(52, 121, 246);
-        border-radius: 6px;
+    #share-n-feedback {
+        display: flex;
+        align-items: center;
+        .separator {
+            margin: 0 4px;
+        }
+        #feedback-btn,
+        #sharer-btn {
+            margin: 10px 0;
+            padding: 4px 6px;
+            color: rgb(52, 121, 246);
+            border-radius: 6px;
 
-        &:hover {
-            background-color: rgba(52, 121, 246, 0.08);
-            cursor: pointer;
+            &:hover {
+                background-color: rgba(52, 121, 246, 0.08);
+                cursor: pointer;
+            }
         }
     }
 }

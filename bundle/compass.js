@@ -1,4 +1,4 @@
-window.onload = () => {
+window.addEventListener("load", () => {
     const directions = {
         N: { name: "N", range: [337.5, 22.5] },
         NE: { name: "NE", range: [22.5, 67.5] },
@@ -269,7 +269,31 @@ window.onload = () => {
                 ])
             )
             .append(
-                j2h.element("div", { id: "feedback-btn" }, "Give Feedback")
+                j2h.element(
+                    "div",
+                    {
+                        id: "share-n-feedback",
+                    },
+                    [
+                        j2h.element(
+                            "div",
+                            {
+                                id: "sharer-btn",
+                                onclick:
+                                    "try { sharer.open(); } catch { alert('It appears that the Sharer module has not been fully loaded at this time.'); }",
+                            },
+                            "Share this page"
+                        ),
+                        j2h.element("div", { class: "separator" }, "•"),
+                        j2h.element(
+                            "div",
+                            {
+                                id: "feedback-btn",
+                            },
+                            "Give feedback"
+                        ),
+                    ]
+                )
             );
         frame_content.render();
     };
@@ -430,4 +454,4 @@ window.onload = () => {
             alert("Location access is not supported by your browser.");
         };
     }
-};
+});
