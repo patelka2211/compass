@@ -1,93 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Compass by KP</title>
+        <!-- Sharer scripts start -->
+        <script src="https://cdn.jsdelivr.net/gh/patelka2211/dynamic-colors@1.1.5/DynamicColors.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/patelka2211/dominar@1.2.4/Dominar.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/patelka2211/sharer@1.0.0/Sharer.js"></script>
+        <script
+            defer
+            id="sharer-utility-js"
+            class="set-color-4777ee"
+            src="https://cdn.jsdelivr.net/gh/patelka2211/sharer@1.0.0/utility.js"
+        ></script>
+        <!-- Sharer scripts end -->
+        <link
+            rel="shortcut icon"
+            href="./assets/compass-logo.png"
+            type="image/x-icon"
+        />
+        <link rel="stylesheet" href="./css/style.css" />
+        <script src="./bundle/compass.min.js"></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compass by KP</title>
-    <script id="sharer_iife_script" src="https://patelka2211.github.io/sharer/bundle/sharer.iife.min.js"></script>
-    <link rel="shortcut icon" href="./assets/compass-logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
-    <script src="./bundle/compass.min.js"></script>
+        <!-- Primary Meta Tags -->
+        <meta name="title" content="Compass by KP" />
+        <meta
+            name="description"
+            content="GPS-based compass for navigation and direction finding."
+        />
 
-    <!-- Primary Meta Tags -->
-    <meta name="title" content="Compass by KP" />
-    <meta name="description" content="GPS-based compass for navigation and direction finding." />
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content="website" />
+        <meta
+            property="og:url"
+            content="https://patelka2211.github.io/compass"
+        />
+        <meta property="og:title" content="Compass by KP" />
+        <meta
+            property="og:description"
+            content="GPS-based compass for navigation and direction finding."
+        />
+        <meta
+            property="og:image"
+            content="https://raw.githubusercontent.com/patelka2211/compass/main/assets/opengraph.jpg"
+        />
 
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://patelka2211.github.io/compass" />
-    <meta property="og:title" content="Compass by KP" />
-    <meta property="og:description" content="GPS-based compass for navigation and direction finding." />
-    <meta property="og:image"
-        content="https://raw.githubusercontent.com/patelka2211/compass/main/assets/opengraph.jpg" />
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+            property="twitter:url"
+            content="https://patelka2211.github.io/compass"
+        />
+        <meta property="twitter:title" content="Compass by KP" />
+        <meta
+            property="twitter:description"
+            content="GPS-based compass for navigation and direction finding."
+        />
+        <meta
+            property="twitter:image"
+            content="https://raw.githubusercontent.com/patelka2211/compass/main/assets/opengraph.jpg"
+        />
+    </head>
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://patelka2211.github.io/compass" />
-    <meta property="twitter:title" content="Compass by KP" />
-    <meta property="twitter:description" content="GPS-based compass for navigation and direction finding." />
-    <meta property="twitter:image"
-        content="https://raw.githubusercontent.com/patelka2211/compass/main/assets/opengraph.jpg" />
-</head>
-
-<body>
-    <div id="main-container">
-        <div id="compass-window">
-            <div id="window-content">
-                <div id="frame-content">
-                    <img id="compass-logo" src="./assets/compass-logo.png" alt="Compass Logo">
-                    <p id="greetings">Welcome to Compass</p>
-                    <div class="feature">
-                        <div class="feature-icon">
-                            <svg viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="22.4289" cy="33.2655" r="4.88409" fill="#007AFF" />
-                                <path d="M22.4289 38.197L45 6L0 6.04742L22.4289 38.197Z"
-                                    fill="url(#paint0_linear_25_18)" />
-                                <defs>
-                                    <linearGradient id="paint0_linear_25_18" x1="22.4763" y1="6" x2="22.4763"
-                                        y2="38.1496" gradientUnits="userSpaceOnUse">
-                                        <stop stop-color="#007AFF" stop-opacity="0" />
-                                        <stop offset="1" stop-color="#007AFF" stop-opacity="0.32" />
-                                    </linearGradient>
-                                </defs>
-                            </svg>
+    <body>
+        <div id="main-container">
+            <div id="compass-window">
+                <div id="window-content">
+                    <div id="frame-content">
+                        <img
+                            id="compass-logo"
+                            src="./assets/compass-logo.png"
+                            alt="Compass Logo"
+                        />
+                        <p id="greetings">Welcome to Compass</p>
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <svg
+                                    viewBox="0 0 45 45"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <circle
+                                        cx="22.4289"
+                                        cy="33.2655"
+                                        r="4.88409"
+                                        fill="#007AFF"
+                                    />
+                                    <path
+                                        d="M22.4289 38.197L45 6L0 6.04742L22.4289 38.197Z"
+                                        fill="url(#paint0_linear_25_18)"
+                                    />
+                                    <defs>
+                                        <linearGradient
+                                            id="paint0_linear_25_18"
+                                            x1="22.4763"
+                                            y1="6"
+                                            x2="22.4763"
+                                            y2="38.1496"
+                                            gradientUnits="userSpaceOnUse"
+                                        >
+                                            <stop
+                                                stop-color="#007AFF"
+                                                stop-opacity="0"
+                                            />
+                                            <stop
+                                                offset="1"
+                                                stop-color="#007AFF"
+                                                stop-opacity="0.32"
+                                            />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <div class="feature-content">
+                                <div class="feature-title">Navigate</div>
+                                <div class="feature-description">
+                                    GPS-based compass for navigation and
+                                    direction finding.
+                                </div>
+                            </div>
                         </div>
-                        <div class="feature-content">
-                            <div class="feature-title">Navigate</div>
-                            <div class="feature-description">
-                                GPS-based compass for navigation and direction finding.
+                        <div class="feature">
+                            <div class="feature-icon">
+                                <img
+                                    src="https://avatars.githubusercontent.com/u/82671701"
+                                    alt="KP"
+                                />
+                            </div>
+                            <div class="feature-content">
+                                <div class="feature-title">
+                                    <a
+                                        href="https://github.com/patelka2211"
+                                        target="_blank"
+                                        >Developer</a
+                                    >
+                                </div>
+                                <div class="feature-description">
+                                    <a
+                                        href="https://github.com/patelka2211"
+                                        target="_blank"
+                                    >
+                                        Developed in India with ❤️ by
+                                        <strong>KP</strong>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="share-n-feedback">
+                            <div
+                                id="sharer-btn"
+                                onclick="try { Sharer.open(); } catch { alert('It appears that the Sharer module has not been fully loaded at this time.'); }"
+                            >
+                                Share this page
                             </div>
                         </div>
                     </div>
-                    <div class="feature">
-                        <div class="feature-icon"><img src="https://avatars.githubusercontent.com/u/82671701" alt="KP">
-                        </div>
-                        <div class="feature-content">
-                            <div class="feature-title"><a href="https://github.com/patelka2211"
-                                    target="_blank">Developer</a></div>
-                            <div class="feature-description">
-                                <a href="https://github.com/patelka2211" target="_blank">
-                                    Developed in India with ❤️ by <strong>KP</strong>
-                                </a>
-                            </div>
-                        </div>
+                    <div id="frame-btns">
+                        <button id="toggle-updates">
+                            Allow location access
+                        </button>
+                        <button
+                            id="Developed-by-KP"
+                            onclick="window.open('https://github.com/patelka2211','_blank')"
+                        >
+                            <strong>Developed in India with ❤️ by KP</strong>
+                        </button>
                     </div>
-                    <div id="share-n-feedback">
-                        <div id="sharer-btn"
-                            onclick="try { sharer.open(); } catch { alert('It appears that the Sharer module has not been fully loaded at this time.'); }">
-                            Share this page</div>
-                    </div>
-                </div>
-                <div id="frame-btns">
-                    <button id="toggle-updates">Allow location access</button>
-                    <button id="Developed-by-KP" onclick="window.open('https://github.com/patelka2211','_blank')">
-                        <strong>Developed in India with ❤️ by KP</strong></button>
                 </div>
             </div>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>
