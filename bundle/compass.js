@@ -280,7 +280,7 @@ window.addEventListener("load", () => {
                             {
                                 id: "sharer-btn",
                                 onclick:
-                                    "try { sharer.open(); } catch { alert('It appears that the Sharer module has not been fully loaded at this time.'); }",
+                                    "try { Sharer.open(); } catch { alert('It appears that the Sharer module has not been fully loaded at this time.'); }",
                             },
                             "Share this page"
                         ),
